@@ -1,0 +1,33 @@
+#Import regular expressions
+import re
+
+#Prompt the user for the file name
+name = input('Enter file name: ')
+#If the user does not add a name (<1 character in length) use file "'CH_11_DATA_py4e-data.dr-chuck.net_regex_sum_276962.txt"
+if len(name) < 1 : name = 'CH_11_DATA_py4e-data.dr-chuck.net_regex_sum_276962.txt'
+#Open the file
+handle = open(name)
+
+#Create a list
+number_list = list()
+#Loop through the lines in the file, strip whitespace, and use Regular Expressions to find numbers, then add the numbers to the list.
+for line in handle:
+    line = line.rstrip()
+    search = re.findall('[0-9]+',line)
+    if len(search) <1: continue
+    number_list.append(search)
+
+#Create a new list and create ‘counts’ and ‘total’
+new_list = []
+count = 0
+total = 0
+#Loop through the original list above to count when there are numbers and to sum those numbers
+for element in number_list:
+    for item in element:
+        new_list.append(item)
+        count = count + 1
+        total = total + int(item)
+
+#Print the count (how many numbers there were) and the total (sum of all the numbers in the file)
+print('Count: ',count)
+print('Total: ',total)
